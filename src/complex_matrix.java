@@ -12,6 +12,9 @@ class complex_matrix {
 
     public complex_matrix add(complex_matrix other) {
         int n = matrix.length;
+        if (this.matrix.length != other.matrix.length) {
+            throw new IllegalArgumentException("Нельзя складывать матрицы разных размеров");
+         }
         complex_matrix res = new complex_matrix(n);
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -119,6 +122,9 @@ class complex_matrix {
     }
 
     public complex_matrix divide(complex_matrix other) {
+        if (this.matrix.length != other.matrix.length) {
+    throw new IllegalArgumentException("Матрицы должны быть одного размера");
+}
         complex_matrix oth_inv = other.inverse();
         return this.multiply(oth_inv);
     }
