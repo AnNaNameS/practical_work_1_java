@@ -4,6 +4,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         while (true) {
+            System.out.println("0 - Выход");
             System.out.println("1 - Сложение");
             System.out.println("2 - Умножение");
             System.out.println("3 - Деление");
