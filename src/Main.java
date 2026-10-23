@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -9,7 +10,14 @@ public class Main {
             System.out.println("4 - Транспонирование");
             System.out.println("5 - Определитель");
             System.out.print("Выберите операцию: ");
-            int choice = sc.nextInt();
+            int choice;
+            try {
+                choice = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Ошибка: введите номер операции");
+                sc.nextLine();
+                continue;
+            }
             if (choice == 0) {
                 break;
             }
@@ -50,18 +58,47 @@ public class Main {
 }
 
     static complex_matrix readMatrix(Scanner sc){
-        System.out.print("Введите размер матрицы:");
-        int n = sc.nextInt();
-        if ( n <= 0) {
-            throw new IllegalArgumentException("Размер матрицы должен быть положительным");
-        }
+           int n;
+           while (true) {
+                System.out.print("Введите размер матрицы:");
+                try {
+                    n = sc.nextInt();
+                    if (n <= 0) {
+                        System.out.println("Ошибка: размер матрицы должен быть положительным");
+                        continue;
+                    }
+                    break;
+
+                } catch (InputMismatchException e) {
+                    System.out.println("Ошибка: введите целое число");
+                    sc.nextLine();
+                }
+            }
         complex_matrix m = new complex_matrix(n);
         for ( int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++){
-                System.out.print("Элемент [" + i + "][" + j + "] (real): ");
-                double real = sc.nextDouble();
-                System.out.print("Элемент [" + i + "][" + j + "] (image): ");
-                double image = sc.nextDouble();
+               double real;
+               while (true) {
+                    System.out.print("Элемент [" + i + "][" + j + "] (real): ");
+                    try {
+                        real = sc.nextDouble();
+                        break;
+                    } catch (InputMismatchException ex) {
+                        System.out.println("Ошибка: введите число");
+                        sc.nextLine();
+                    }
+                }
+                double image;
+                while (true) {
+                    System.out.print("Элемент [" + i + "][" + j + "] (image): ");
+                    try {
+                        image = sc.nextDouble();
+                        break;
+                    } catch (InputMismatchException ex) {
+                        System.out.println("Ошибка: введите число");
+                        sc.nextLine();
+                    }
+                }
                 m.matrix[i][j] = new complex_number(real, image);
             }
         }
