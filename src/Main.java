@@ -52,7 +52,7 @@ public class Main {
     static complex_matrix readMatrix(Scanner sc){
         System.out.print("Введите размер матрицы:");
         int n = sc.nextInt();
-        if ( n<= 0) {
+        if ( n <= 0) {
             throw new IllegalArgumentException("Размер матрицы должен быть положительным");
         }
         complex_matrix m = new complex_matrix(n);
