@@ -22,6 +22,9 @@ class complex_matrix {
     }
 
     public complex_matrix multiply(complex_matrix other) {
+        if (this.matrix.length != other.matrix.length) {
+            throw new IllegalArgumentException("Нельзя умножить матрицы разных размеров");
+         }
         int n = matrix.length;
         complex_matrix res = new complex_matrix(n);
         for (int i = 0; i < n; i++) {
